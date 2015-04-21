@@ -14,7 +14,7 @@
    <string>RrsmPng</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="gvImage">
+   <widget class="MyGraphicsView" name="gvImage">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -22,6 +22,9 @@
       <width>551</width>
       <height>551</height>
      </rect>
+    </property>
+    <property name="dragMode">
+     <enum>QGraphicsView::ScrollHandDrag</enum>
     </property>
    </widget>
    <widget class="QToolBox" name="tbSidebar">
@@ -261,6 +264,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>rrsmpng/MyGraphicsView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
