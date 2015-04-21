@@ -11,7 +11,6 @@ class RrsmPngGui(QtGui.QWidget):
         self.args = args
         self.pi = ProcessImage(self.args.filename)
         self.initUI()
-        self.setupEvent()
         self.display_image(self.pi.pilLoadPng())
         
     def initUI(self):
