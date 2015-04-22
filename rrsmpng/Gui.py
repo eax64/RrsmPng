@@ -2,6 +2,7 @@ import sys
 import argparse
 from rrsmpng.ProcessImage import *
 from rrsmpng.MyGraphicsView import *
+from rrsmpng.Log import *
 from PySide import QtCore, QtGui, QtUiTools
 from rrsmpng.MainWindow import Ui_MainWindow
 
@@ -11,12 +12,24 @@ class RrsmPngGui(QtGui.QWidget):
         self.args = args
         self.pi = ProcessImage(self.args.filename)
         self.initUI()
-        self.display_image(self.pi.pilLoadPng())
+        self.log = Log(self.ui.pteLog)
         
+        self.tryNormalLaod()
+
+    def tryNormalLaod(self):
+        self.log.info("Tring to open the png with PIL...")
+        try:
+            im = self.pi.pilLoadPng()
+            self.display_image(im)
+        except Exception as e:
+            err = "Exception: %s: %s" % (type(e).__name__, e)
+            self.log.error(err)
     def initUI(self):
         self.MainWindow = QtGui.QMainWindow()
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.MainWindow)        
+        self.ui.setupUi(self.MainWindow)
+
+
     
     def display_image(self, qtImg):
         scene = QtGui.QGraphicsScene()
