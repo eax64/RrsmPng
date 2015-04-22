@@ -10,11 +10,21 @@ class RrsmPngGui(QtGui.QWidget):
     def __init__(self, args):
         super(RrsmPngGui, self).__init__()
         self.args = args
-        self.pi = ProcessImage(self.args.filename)
         self.initUI()
         self.log = Log(self.ui.pteLog)
+        self.pi = ProcessImage(self.args.filename)
+        self.pi.log = self.log
         
-        self.tryNormalLaod()
+        if not self.tryNormalLaod():
+            self.log.info("Tring to open the png with custom parsing...")
+            if not self.pi.cleanParsingPng():
+                self.log.info("Tring to open the png with by seeking correct chunk...")
+                pass
+        model = QtGui.QStandardItemModel()
+        for c in self.pi.chunks:
+            model.appendRow(QtGui.QStandardItem(str(c)))
+        self.ui.lvChunks.setModel(model)
+        
 
     def tryNormalLaod(self):
         self.log.info("Tring to open the png with PIL...")
@@ -24,6 +34,9 @@ class RrsmPngGui(QtGui.QWidget):
         except Exception as e:
             err = "Exception: %s: %s" % (type(e).__name__, e)
             self.log.error(err)
+            return False
+        return True
+    
     def initUI(self):
         self.MainWindow = QtGui.QMainWindow()
         self.ui = Ui_MainWindow()

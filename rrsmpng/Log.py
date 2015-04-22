@@ -14,7 +14,7 @@ class Log(object):
         self.add(text, "red")
 
     def warning(self, text):
-        self.add(text, "yellow")
+        self.add(text, "orange")
 
     def info(self, text):
         self.add(text, "green")
