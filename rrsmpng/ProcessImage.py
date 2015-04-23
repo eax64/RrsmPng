@@ -11,26 +11,29 @@ class ProcessImage(object):
         self.filename = filename
         self.log = None
         self.chunks = []
+        self.size = (200,200)
 
-    def pilLoadPng(self):
-        im = Image.open(self.filename)
+    def pilLoadPng(self, filename=None):
+        fn = self.filename
+        if filename:
+            fn = filename
+        im = Image.open(fn)
         return self.pilToQImage(im, im.size)
 
     def pilToQImage(self, im, size):
         return QtGui.QImage(im.tobytes("raw", "BGRX"), size[0], size[1], QtGui.QImage.Format_RGB32)
         
     def genRandomTest(self):
-        size = (200,200)
-        im = Image.new("RGB", size)
+        im = Image.new("RGB", self.size)
         d = []
-        for i in range(size[0]*size[1]):
+        for i in range(self.size[0]*self.size[1]):
             v = (random.randint(0, 255),
                  random.randint(0, 255),
                  random.randint(0, 255))
             d.append(v)
         im.putdata(d)
         
-        return self.pilToQImage(im, size)
+        return self.pilToQImage(im, self.size)
 
     def cleanParsingPng(self):
         data = open(self.filename, "rb").read()
@@ -81,12 +84,13 @@ class ProcessImage(object):
         for coff,cname,csize in chunks_offsets:
             c = Chunk(csize, cname)
             cc = c.factory(data[coff+4:])
+            if (cc.fieldName == b"IHDR"):
+                self.size = (cc.fieldWidth, cc.fieldHeight)
             self.chunks.append(cc)
-            #print(cc)
+
         return True
 
     def idatToImage(self):
-        print("blaaaaaaaaaaaaaa")
         all_chunks = b"".join(c.fieldData for c in self.chunks if c.fieldName == b"IDAT")
         i = 0
         while i < len(all_chunks):
@@ -97,12 +101,10 @@ class ProcessImage(object):
                 continue
             break
 
-        size = (960,600)
         raw2 = bytearray()
         for vv in range(0, len(raw)):
-            if vv % (size[0]*3 + 1) == 0:
+            if vv % (self.size[0]*3 + 1) == 0:
                 if raw[vv] > 4:
-                    print("bla")
                     raw2.append(3)
                 else:
                     raw2.append(raw[vv])
@@ -110,15 +112,15 @@ class ProcessImage(object):
                 raw2.append(raw[vv])
                     
         raw2 = zlib.compress(raw2)
-        newf = open("/tmp/tmp.png", "wb")
+        newf = open("/tmp/rrsmpng-tmp.png", "wb")
         s = b"\x89PNG\x0d\x0a\x1a\x0a"
         s +=  struct.pack(">I4s",
                          13,
                          b"IHDR")
                          
         chunk = struct.pack(">IIBBBBB",
-                         size[0],
-                         size[1],
+                         self.size[0],
+                         self.size[1],
                          8,
                          2,
                          0,
@@ -140,13 +142,13 @@ class ProcessImage(object):
         
        
         
-        im = Image.new("RGB", size)
-        d = []
-        for i in range(size[0]*size[1]):
-            v = (50,0,0)
-            if i*3 + 3 <= len(raw):
-                v = (raw[i*3], raw[i*3+1], raw[i*3+2])
-            d.append(v)
-        im.putdata(d)
+        # im = Image.new("RGB", size)
+        # d = []
+        # for i in range(size[0]*size[1]):
+        #     v = (50,0,0)
+        #     if i*3 + 3 <= len(raw):
+        #         v = (raw[i*3], raw[i*3+1], raw[i*3+2])
+        #     d.append(v)
+        # im.putdata(d)
         
-        return self.pilToQImage(im, size)
+        return self.pilLoadPng("/tmp/rrsmpng-tmp.png")

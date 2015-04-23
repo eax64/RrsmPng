@@ -20,7 +20,24 @@ class RrsmPngGui(QtGui.QWidget):
         for c in self.pi.chunks:
             model.appendRow(QtGui.QStandardItem(str(c)))
         self.ui.lvChunks.setModel(model)
-        
+        self.setup_update()
+
+
+    def setup_update(self, setMax=True):
+        print(self.pi.size)
+        self.ui.sbWidth.setMinimum(0)
+        self.ui.sbWidth.setMaximum(self.pi.size[0]*2)
+        self.ui.sbWidth.setValue(self.pi.size[0])
+        self.ui.sbHeight.setMinimum(0)
+        self.ui.sbHeight.setMaximum(self.pi.size[1]*2)
+        self.ui.sbHeight.setValue(self.pi.size[1])
+
+        self.ui.hsWidth.setMinimum(0)
+        self.ui.hsWidth.setMaximum(self.pi.size[0]*2)
+        self.ui.hsWidth.setValue(self.pi.size[0])
+        self.ui.hsHeight.setMinimum(0)
+        self.ui.hsHeight.setMaximum(self.pi.size[1]*2)
+        self.ui.hsHeight.setValue(self.pi.size[1])
 
     def loadImage(self):
         if self.tryNormalLaod():
@@ -46,11 +63,23 @@ class RrsmPngGui(QtGui.QWidget):
             self.log.error(err)
             return False
         return True
+
+    def event_hsWidth(self, val):
+        self.pi.size = (val, self.pi.size[1])
+        self.display_image(self.pi.idatToImage())
+
+    def event_hsHeight(self, val):
+        self.pi.size = (self.pi.size[0], val)
+        self.display_image(self.pi.idatToImage())
     
     def initUI(self):
         self.MainWindow = QtGui.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
+        self.ui.hsWidth.valueChanged.connect(self.ui.sbWidth.setValue)
+        self.ui.hsWidth.valueChanged.connect(self.event_hsWidth)
+        self.ui.hsHeight.valueChanged.connect(self.ui.sbHeight.setValue)
+        self.ui.hsHeight.valueChanged.connect(self.event_hsHeight)
 
 
     
