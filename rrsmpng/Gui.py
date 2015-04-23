@@ -15,19 +15,29 @@ class RrsmPngGui(QtGui.QWidget):
         self.pi = ProcessImage(self.args.filename)
         self.pi.log = self.log
         
-        if not self.tryNormalLaod():
-            self.log.info("Tring to open the png with custom parsing...")
-            if not self.pi.cleanParsingPng():
-                self.log.info("Tring to open the png with by seeking correct chunk...")
-                pass
+        self.loadImage()
         model = QtGui.QStandardItemModel()
         for c in self.pi.chunks:
             model.appendRow(QtGui.QStandardItem(str(c)))
         self.ui.lvChunks.setModel(model)
         
 
+    def loadImage(self):
+        if self.tryNormalLaod():
+            return
+        self.log.info("Trying to open the png with custom parsing...")
+        
+        if self.pi.cleanParsingPng():
+            return
+        self.log.info("Trying to open the png by seeking correct chunk...")
+        
+        if self.pi.chunksSeekingParsing():
+            self.display_image(self.pi.idatToImage())
+            return
+        self.log.info("Couldn't parse as a valid png file. Try to read it as a raw png chunk")
+        
     def tryNormalLaod(self):
-        self.log.info("Tring to open the png with PIL...")
+        self.log.info("Trying to open the png with PIL...")
         try:
             im = self.pi.pilLoadPng()
             self.display_image(im)
