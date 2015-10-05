@@ -40,21 +40,24 @@ class RrsmPngGui(QtGui.QWidget):
         self.ui.hsHeight.setValue(self.pi.size[1])
 
     def loadImage(self):
+        self.log.info("Trying to open the png with PIL...")
         if self.tryNormalLaod():
             return
+
         self.log.info("Trying to open the png with custom parsing...")
-        
         if self.pi.cleanParsingPng():
             return
-        self.log.info("Trying to open the png by seeking correct chunk...")
         
+        self.log.info("Trying to open the png by seeking correct chunk...")
         if self.pi.chunksSeekingParsing():
             self.display_image(self.pi.idatToImage())
+            self.ui.pntScanlines.data = self.pi.scanlines
+            self.ui.pntScanlines.update()
             return
+        
         self.log.info("Couldn't parse as a valid png file. Try to read it as a raw png chunk")
         
     def tryNormalLaod(self):
-        self.log.info("Trying to open the png with PIL...")
         try:
             im = self.pi.pilLoadPng()
             self.display_image(im)
@@ -64,6 +67,10 @@ class RrsmPngGui(QtGui.QWidget):
             return False
         return True
 
+    def onScanlinesChanged(self):
+        self.pi.newScanlines = self.ui.pntScanlines.data
+        self.display_image(self.pi.idatToImage())
+    
     def event_hsWidth(self, val):
         self.pi.size = (val, self.pi.size[1])
         self.display_image(self.pi.idatToImage())
@@ -80,6 +87,8 @@ class RrsmPngGui(QtGui.QWidget):
         self.ui.hsWidth.valueChanged.connect(self.event_hsWidth)
         self.ui.hsHeight.valueChanged.connect(self.ui.sbHeight.setValue)
         self.ui.hsHeight.valueChanged.connect(self.event_hsHeight)
+        self.ui.pntScanlines.scanlinesChanged.connect(self.onScanlinesChanged)
+        
 
 
     

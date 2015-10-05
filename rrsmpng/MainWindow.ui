@@ -6,247 +6,349 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1184</width>
+    <height>815</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>RrsmPng</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="MyGraphicsView" name="gvImage">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>551</width>
-      <height>551</height>
-     </rect>
-    </property>
-    <property name="dragMode">
-     <enum>QGraphicsView::ScrollHandDrag</enum>
-    </property>
-   </widget>
-   <widget class="QToolBox" name="tbSidebar">
-    <property name="geometry">
-     <rect>
-      <x>557</x>
-      <y>3</y>
-      <width>241</width>
-      <height>541</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="pageActions">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>241</width>
-       <height>429</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Actions</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>210</y>
-        <width>241</width>
-        <height>211</height>
-       </rect>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="MyGraphicsView" name="gvImage">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="title">
-       <string>Log</string>
+      <property name="dragMode">
+       <enum>QGraphicsView::ScrollHandDrag</enum>
       </property>
-      <widget class="QPlainTextEdit" name="pteLog">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>221</width>
-         <height>171</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-       <property name="plainText">
-        <string/>
-       </property>
-      </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="pageSetup">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>98</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Setup</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>221</width>
-        <height>151</height>
-       </rect>
+    </item>
+    <item>
+     <widget class="QToolBox" name="tbSidebar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="title">
-       <string>Size</string>
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>0</height>
+       </size>
       </property>
-      <widget class="QSlider" name="hsWidth">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>60</y>
-         <width>160</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QSlider" name="hsHeight">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>120</y>
-         <width>160</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="sbWidth">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>30</y>
-         <width>45</width>
-         <height>23</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>40</y>
-         <width>53</width>
-         <height>14</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Width</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>100</y>
-         <width>53</width>
-         <height>14</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Height</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="sbHeight">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>90</y>
-         <width>45</width>
-         <height>23</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="pageChunks">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>98</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Chunks</string>
-     </attribute>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>241</width>
-        <height>421</height>
-       </rect>
+      <property name="maximumSize">
+       <size>
+        <width>0</width>
+        <height>16777215</height>
+       </size>
       </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents">
+      <widget class="QWidget" name="pageActions">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>239</width>
-         <height>419</height>
+         <width>300</width>
+         <height>634</height>
         </rect>
        </property>
-       <widget class="QListView" name="lvChunks">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>241</width>
-          <height>421</height>
-         </rect>
-        </property>
-       </widget>
+       <attribute name="label">
+        <string>Actions</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Parsing</string>
+          </property>
+          <widget class="QRadioButton" name="rbParsing1">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>50</y>
+             <width>151</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Standard PIL loading</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="rbParsing2">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>80</y>
+             <width>141</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Safe loading</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="rbParsing3">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>110</y>
+             <width>141</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Seek chunk in file</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="rbParsing4">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>140</y>
+             <width>161</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Read as a chunk blob</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Log</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QPlainTextEdit" name="pteLog">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="plainText">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageSetup">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>300</width>
+         <height>634</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Setup</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Size</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Width</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="sbWidth"/>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QSlider" name="hsWidth">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Height</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QSpinBox" name="sbHeight"/>
+           </item>
+           <item row="10" column="0" colspan="2">
+            <widget class="QSlider" name="hsHeight">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageChunks">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>300</width>
+         <height>634</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Chunks</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>278</width>
+             <height>612</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QListView" name="lvChunks"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageScanlines">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>300</width>
+         <height>634</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Scanlines</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Zoom</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Scanlines</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Scroll</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="1" column="2">
+             <widget class="QSlider" name="vsScanlineScroll">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QSlider" name="vsScanlineZoom">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="MyPainterScanline" name="pntScanlines" native="true"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="cbRtupdate">
+          <property name="text">
+           <string>Realtime update</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="pageScanlines">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>98</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Scanlines</string>
-     </attribute>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>19</height>
+     <width>1184</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -275,6 +377,11 @@
    <class>MyGraphicsView</class>
    <extends>QGraphicsView</extends>
    <header>rrsmpng/MyGraphicsView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyPainterScanline</class>
+   <extends>QWidget</extends>
+   <header>rrsmpng/MyPainterScanline.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

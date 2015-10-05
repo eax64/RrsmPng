@@ -12,6 +12,8 @@ class ProcessImage(object):
         self.log = None
         self.chunks = []
         self.size = (200,200)
+        self.scanlines = []
+        self.newScanlines = []
 
     def pilLoadPng(self, filename=None):
         fn = self.filename
@@ -41,6 +43,7 @@ class ProcessImage(object):
         wdata = data
         if not data.startswith(b"\x89PNG\x0d\x0a\x1a\x0a"):
             self.log.error("Bad file header. Stop clean parsing")
+            return False
         wdata = wdata[8:]
         
         try:
@@ -102,15 +105,22 @@ class ProcessImage(object):
             break
 
         raw2 = bytearray()
+        scanline_idx = 0
+        self.scanlines = []
         for vv in range(0, len(raw)):
             if vv % (self.size[0]*3 + 1) == 0:
-                if raw[vv] > 4:
-                    raw2.append(3)
+                if self.newScanlines:
+                    sl = self.newScanlines[scanline_idx]
                 else:
-                    raw2.append(raw[vv])
+                    sl = raw[vv]
+                    if raw[vv] > 4:
+                        sl = 3
+                raw2.append(sl)
+                self.scanlines.append(sl)
+                scanline_idx += 1
             else:
                 raw2.append(raw[vv])
-                    
+                
         raw2 = zlib.compress(raw2)
         newf = open("/tmp/rrsmpng-tmp.png", "wb")
         s = b"\x89PNG\x0d\x0a\x1a\x0a"
